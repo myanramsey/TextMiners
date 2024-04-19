@@ -19,6 +19,12 @@ def get_important_names(text):
             sorted_named_entities.remove(name)
 
     print(sorted_named_entities)
+    #Following code used to test set classes
+    # x = HashTable()
+    # for i in sorted_named_entities:
+    #     x.insert(i)
+    # x.printInOrder()
+
 
     word_freq = Counter(sorted_named_entities)
 
@@ -72,6 +78,49 @@ class hashMap:
         else:
             bucket.append((key, 1))
 
+
+
+
+#Charles Code Start
+
+#utilize class for sets to make has table like data structre
+class structSimulator:
+    def __init__(self, key, instances):
+        self.key = key
+        self.instances = instances
+
+    #utlized to sort objects in the class
+    def __gt__(self, less):
+        return self.instances < less.instances
+
+class HashTable:
+    def __init__(self):
+        self.hashTable = set()
+        self.bucketValue = 0
+
+    #For every duplicate found, increment by one
+    def insert(self, key):
+        keyFound = False
+        for iter in self.hashTable:
+            if key == iter.key:
+                iter.instances +=1
+                keyFound=True
+
+    #For every new word for an object will be made for it
+        if not keyFound:
+            y =structSimulator(key, 1)
+            self.hashTable.add(y)
+
+    #Will print out the duplicates in order of frequency
+    def printInOrder(self):
+        t = sorted(self.hashTable)
+        for i in t:
+            print(f'{i.key}: {i.instances}')
+            
+#Charles Code End
+
+
+
 def main():
     print("Hello World!")
     choice = int(input("What file would you like to read? "))
@@ -88,4 +137,11 @@ def main():
     print("loading...")
     get_important_names(text)
 
-main()
+
+
+
+if __name__ == '__main__':
+    main()
+
+
+
