@@ -1,8 +1,7 @@
 import nltk
-from nltk import ne_chunk
-from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
+import re
 
 def get_important_names(text):
     # Get important Names
@@ -36,10 +35,28 @@ def get_most_common_places(text):
     return most_common_places
 
 def get_most_common_date(text):
-    tokens = nltk.word_tokenize(text)
-    tagged_tokens = nltk.pos_tag(tokens)
 
-    for token,tag in tagged_tokens:
+    months = {'January', 'February', 'March', 'April', 'May','June', 'July', 'August', 'September', 'October', 'November', 'December'}
+    date_patterns = [
+        r'\b\w+\s\d+,\s\d{4}\b',  # e.g., "January 1, 2023"
+        r'\b\d{1,2}/\d{1,2}/\d{4}\b',  # e.g., "1/1/2023"
+        r'\b\d{4}-\d{2}-\d{2}\b'  # e.g., "2023-01-01"
+        r'\b\w+\s\d{4}\b'
+    ]
+
+    dates = []
+    pls_work = []
+    for pattern in date_patterns:
+        matches = re.findall(pattern, text)
+        for i in matches:
+            for key in months:
+                if key in i:
+                    dates.append(i)
+
+
+
+
+    return dates
 def printTest(array):
     word_freq = Counter(array)
 
@@ -75,7 +92,7 @@ def main():
     elif info_choice == 2:
         arr = get_most_common_places(text)
     elif info_choice == 3:
-        arr = get_most_common_date("The event is scheduled for January 1, 2023.")
+        arr = get_most_common_date(text)
 
     printTest(arr)
 
