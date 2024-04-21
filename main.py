@@ -2,6 +2,34 @@ import nltk
 from nltk.corpus import stopwords
 from collections import Counter
 import re
+=======
+class MaxHeap:
+    def __init__(self):
+        self.maxHeap = []
+
+    #For every duplicate found, increment by one
+    def insert(self, key, frequency):
+        heap = structSimulator(key, frequency * -1)
+        self.maxHeap.append(heap)
+    #     keyFound = False
+    #     for iter in self.hashTable:
+    #         if key == iter.key:
+    #             iter.instances +=1
+    #             keyFound=True
+    #
+    # #For every new word for an object will be made for it
+    #     if not keyFound:
+    #         y =structSimulator(key, 1)
+    #         self.hashTable.add(y)
+    def Heapify(self):
+        heapq.heapify(self.maxHeap)
+
+    #Will print out the duplicates in order of frequency
+    def printInOrder(self):
+        t = self.maxHeap
+        while t.__sizeof__() != 0:
+            x = heapq.heappop(self.maxHeap)
+            print(f'{x.key}: {x.instances}')
 
 def get_important_names(text):
     # Get important Names
@@ -43,7 +71,7 @@ def get_most_common_date(text):
         r'\b\d{4}-\d{2}-\d{2}\b'  # e.g., "2023-01-01"
         r'\b\w+\s\d{4}\b'
     ]
-
+    
     dates = []
     pls_work = []
     for pattern in date_patterns:
@@ -52,11 +80,8 @@ def get_most_common_date(text):
             for key in months:
                 if key in i:
                     dates.append(i)
-
-
-
-
     return dates
+  
 def printTest(array):
     word_freq = Counter(array)
 
