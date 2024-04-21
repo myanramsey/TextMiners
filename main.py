@@ -96,13 +96,6 @@ def main():
 
     printTest(arr)
 
-
-
-
-
-
-
-
 if __name__ == '__main__':
     main()
 
