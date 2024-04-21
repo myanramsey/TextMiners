@@ -20,7 +20,7 @@ class hashMap:
     def create_buckets(self):
         return [[] for _ in range(self.size)]
 
-    def add_Value(self, key, count):
+    def add_Value(self, key):
 
         # using the hash function to get the index
         hashed_key = hash_function(key) % self.size
@@ -29,26 +29,27 @@ class hashMap:
         bucket = self.hash_table[hashed_key]
 
         found_key = False
-        for index, record in enumerate(bucket):
-            record_key, record_val = record
 
+        index = -1  # Initialize index outside the loop
+        for idx, record in enumerate(bucket):
+            record_key, record_val = record
         # check if the bucket has same key as the key to be inserted
             if record_key == key:
                 found_key = True
+                index = idx  # Set index if the key is found
                 break
 
         # if the key to be inserted is in the bucket then increment the value
         # else add to the value with a count of 1
         if found_key:
-            count += 1
-            bucket[index] = (key, count)
+            bucket[index] = (key, record_val + 1)
         else:
             bucket.append((key, 1))
 
         # finding the most frequent word in the hash map
-        if count > self.common_count:
+        if bucket[index][1] > self.common_count:
             self.most_common = key
-            self.common_count = count
+            self.common_count = bucket[index][1]
 
     def print_most_common (map):
         print(f"The word '{map.most_common}' shows up the most, with a count of {map.common_count}.")
