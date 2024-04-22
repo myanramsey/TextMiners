@@ -140,9 +140,9 @@ def main():
                     heap = MaxHeap()
                     for i in arr:
                         heap.insert(i)
-                    heap.heapSort()
+                    heap.heap_sort()
                     end = time.perf_counter_ns()
-                    heap.printInOrder()
+                    heap.print_in_order()
                     print(f'Time Results: {end - start} Nano Seconds')
                 elif(user_choice == 3):
                     data_choice = False;
@@ -156,6 +156,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
