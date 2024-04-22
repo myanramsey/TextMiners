@@ -42,7 +42,6 @@ class MaxHeap:
         for index, i in enumerate(self.maxHeap):
             if i.key == heap.key:
                 keyFound = True
-                print(f'key that was found {i.key}')
                 self.maxHeap[index].instances +=1
                 self.heapify(self.maxHeap[index].instances, 0)
 
@@ -51,7 +50,6 @@ class MaxHeap:
             self.maxHeap.append(heap)
             i = self.size -1
             while i > 0:
-                print("i")
                 self.maxHeap[i], self.maxHeap[i -1] = self.maxHeap[i -1], self.maxHeap[i]  # swap
                 i-=1
             self.heapify(heap.instances, 0)
@@ -71,9 +69,13 @@ class MaxHeap:
 
     #Will print out the duplicates in order of frequency
     def printInOrder(self):
-       for i in self.maxHeap:
-           print(f'{i.key}: {i.instances}')
+        print("Top 10")
+        for i in self.maxHeap[len(self.maxHeap)-1:len(self.maxHeap)-11:-1]:
+            print(f'{i.key}: {i.instances}')
 
+        print("Least 10")
+        for i in self.maxHeap[0:10]:
+            print(f'{i.key}: {i.instances}')
 
 
     # The main function to sort an array of given size
