@@ -69,11 +69,13 @@ class MaxHeap:
 
     #Will print out the duplicates in order of frequency
     def printInOrder(self):
-        print("Top 10")
+        print("10 Most Common Words:")
         for i in self.maxHeap[len(self.maxHeap)-1:len(self.maxHeap)-11:-1]:
             print(f'{i.key}: {i.instances}')
 
-        print("Least 10")
+        print()
+
+        print("10 Least Common Words:")
         for i in self.maxHeap[0:10]:
             print(f'{i.key}: {i.instances}')
 
