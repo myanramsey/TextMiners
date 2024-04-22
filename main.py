@@ -131,7 +131,12 @@ def main():
 
                 elif(user_choice == 2):
                     print("Choice 2")
-                # use hashmap to display data
+                # use heap to display data
+                    heap = MaxHeap()
+                    for i in arr:
+                        heap.insert(i)
+                    heap.heapSort()
+                    heap.printInOrder()
                 elif(user_choice == 3):
                     data_choice = False;
 
