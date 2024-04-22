@@ -14,8 +14,8 @@ class hashMap:
     def __init__(self, size):
         self.size = size
         self.hash_table = self.create_buckets()
-        self.most_common = "";
-        self.common_count = 0;
+        self.most_common = ""
+        self.common_count = 0
 
     def create_buckets(self):
         return [[] for _ in range(self.size)]
@@ -51,5 +51,32 @@ class hashMap:
             self.most_common = key
             self.common_count = bucket[index][1]
 
-    def print_most_common (map):
-        print(f"The word '{map.most_common}' shows up the most, with a count of {map.common_count}.")
+    def print_most_common(map):
+        most_common_words = []
+        least_common_words = []
+
+        for bucket in map.hash_table:
+            for key, value in bucket:
+                if len(most_common_words) < 10:
+                    most_common_words.append((key, value))
+                else:
+                    most_common_words.sort(key=lambda x: x[1], reverse=True)
+                    if value > most_common_words[-1][1]:
+                        most_common_words.pop()
+                        most_common_words.append((key, value))
+
+                if len(least_common_words) < 10:
+                    least_common_words.append((key, value))
+                else:
+                    least_common_words.sort(key=lambda x: x[1])
+                    if value < least_common_words[-1][1]:
+                        least_common_words.pop()
+                        least_common_words.append((key, value))
+
+        print("10 Most Common Words:")
+        for word, count in most_common_words:
+            print(f"{word}: {count}")
+
+        print("\n10 Least Common Words:")
+        for word, count in least_common_words:
+            print(f"{word}: {count}")
