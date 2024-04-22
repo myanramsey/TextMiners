@@ -1,7 +1,7 @@
 
 
 # used to change the string index into a useable key in the map
-# used code from geeksForGeeks: https://www.geeksforgeeks.org/hash-map-in-python/#
+# used code from geeksForGeeks: https://www.geeksforgeeks.org/hash-map-in-python/# and data structure from class and/or slides
 def hash_function(s):
     # uses separate chaining to deal with collsions
     hash_value = 0
@@ -59,24 +59,27 @@ class hashMap:
             for key, value in bucket:
                 if len(most_common_words) < 10:
                     most_common_words.append((key, value))
-                else:
                     most_common_words.sort(key=lambda x: x[1], reverse=True)
+
+                else:
                     if value > most_common_words[-1][1]:
                         most_common_words.pop()
                         most_common_words.append((key, value))
+                        most_common_words.sort(key=lambda x: x[1], reverse=True)
 
                 if len(least_common_words) < 10:
                     least_common_words.append((key, value))
+                    least_common_words.sort(key=lambda x: x[1], reverse=True)
                 else:
-                    least_common_words.sort(key=lambda x: x[1])
                     if value < least_common_words[-1][1]:
                         least_common_words.pop()
                         least_common_words.append((key, value))
+                        least_common_words.sort(key=lambda x: x[1])
 
-        print("10 Most Common Words:")
-        for word, count in most_common_words:
-            print(f"{word}: {count}")
+        print("10 most common words:")
+        for i, count in most_common_words:
+            print(f"{i}: {count}")
 
-        print("\n10 Least Common Words:")
-        for word, count in least_common_words:
-            print(f"{word}: {count}")
+        print("\n10 least common words:")
+        for i, count in least_common_words:
+            print(f"{i}: {count}")
