@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import stopwords
 from collections import Counter
 import re
+import time
 
 from hashmap import hashMap
 from heap import MaxHeap
@@ -119,26 +120,33 @@ def main():
                                         "2. Min/Max Heap\n"
                                         "3. Exit\n"
                                         "Input: "))
+                #Source for time code: https://docs.python.org/3/library/time.html#time.perf_counter_ns
                 if(user_choice == 1):
                  # use hashmap to display data
+                    start = time.perf_counter_ns()
                     answer = hashMap(arr.__len__())
                     answer.create_buckets()
                     for word in arr:
                         answer.add_Value(word)
-
+                    end = time.perf_counter_ns()
                     print("Results:")
                     answer.print_most_common()
+                    print(f'Time Results: {end - start} Nano Seconds')
 
                 elif(user_choice == 2):
                     print("Choice 2")
                 # use heap to display data
+                    start = time.perf_counter_ns()
                     heap = MaxHeap()
                     for i in arr:
                         heap.insert(i)
                     heap.heapSort()
+                    end = time.perf_counter_ns()
                     heap.printInOrder()
+                    print(f'Time Results: {end - start} Nano Seconds')
                 elif(user_choice == 3):
                     data_choice = False;
+                    read_choice= False;
 
                 # printTest(arr)
                 print("------------------------------------")
