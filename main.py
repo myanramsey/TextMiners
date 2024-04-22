@@ -4,8 +4,7 @@ from collections import Counter
 import re
 
 from hashmap import hashMap
-
-
+from heap import MaxHeap
 def get_important_names(text):
     # Get important Names
     tokens = nltk.word_tokenize(text)
@@ -127,7 +126,7 @@ def main():
                     for word in arr:
                         answer.add_Value(word)
 
-                    print("Results: \n")
+                    print("Results:")
                     answer.print_most_common()
 
                 elif(user_choice == 2):
@@ -136,7 +135,7 @@ def main():
                 elif(user_choice == 3):
                     data_choice = False;
 
-                printTest(arr)
+                # printTest(arr)
                 print("------------------------------------")
 
 
