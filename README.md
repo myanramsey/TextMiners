@@ -1,6 +1,19 @@
 <H1> COP3530 - Project 3 </h1>
 This is the template for Project 3 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
 
+<H2> How To Use Program</H2>
+Follow steps to install NLTK and Python: 
+
+ - Install Python 3.8: https://www.python.org/downloads/ (avoid the 64-bit versions)
+ - Install Numpy: https://numpy.org/install/
+ - Install NLTK: https://pypi.python.org/pypi/nltk
+ - Test installation: Start>Python38, then type import nltk
+ - Install NLTK libraries by typing in terminal
+	- `python -m nltk.downloader popular`
+   
+ - Run Program 
+
+
 <h2> Table of Contents </h2>
 
 - [Documentation and resources on how to use GitHub for Project 3](#documentation-and-resources-on-how-to-use-github-for-project-3)
