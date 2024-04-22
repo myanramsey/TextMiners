@@ -1,38 +1,70 @@
 
 #utilize class for sets to make has table like data structre
+#Sourced From geeksforgeeks.org https://www.geeksforgeeks.org/heap-sort/
 class structSimulator:
     def __init__(self, key, instances):
         self.key = key
         self.instances = instances
 
-    #utlized to sort objects in the class
-    def __gt__(self, less):
-        return self.instances < less.instances
-
 class MaxHeap:
     def __init__(self):
+        self.size = 0
         self.maxHeap = []
 
+    def heapify(self, N, i):
+        largest = i  # Initialize largest as root
+        l = 2 * i + 1  # left = 2*i + 1
+        r = 2 * i + 2  # right = 2*i + 2
+
+        # See if left child of root exists and is
+        # less than root
+        if r < self.size:
+            if self.maxHeap[l].instances < N.instances and self.maxHeap[largest].instances < self.maxHeap[l].instances:
+                largest = l
+
+        # See if right child of root exists and is
+        # greater than root
+        if r < self.size:
+            if self.maxHeap[r].instances < N.instances and self.maxHeap[largest].instances < self.maxHeap[r].instances:
+                largest = r
+
+        # Change root, if needed
+        if largest != i:
+            self.maxHeap[i], self.maxHeap[largest] = self.maxHeap[largest], self.maxHeap[i]  # swap
+
+            # Heapify the root.
+            self.heapify(N, largest)
+
     #For every duplicate found, increment by one
-    def insert(self, key, frequency):
-        heap = structSimulator(key, frequency * -1)
-        self.maxHeap.append(heap)
-    #     keyFound = False
-    #     for iter in self.hashTable:
-    #         if key == iter.key:
-    #             iter.instances +=1
-    #             keyFound=True
-    #
-    # #For every new word for an object will be made for it
-    #     if not keyFound:
-    #         y =structSimulator(key, 1)
-    #         self.hashTable.add(y)
-    def Heapify(self):
-        heapq.heapify(self.maxHeap)
+    def insert(self, key):
+        keyFound = False
+        heap = structSimulator(key, 1)
+        for index, i in enumerate(self.maxHeap):
+            if i.key == heap.key:
+                keyFound = True
+                print(f'key that was found {i.key}')
+                self.maxHeap[index].instances +=1
+                self.heapify(self.maxHeap[index], 0)
+
+        if keyFound is False:
+            self.size +=1
+            self.maxHeap.append(heap)
+            self.heapify(heap, 0)
+
+
+    def heapSort(self):
+        N = self.size
+
+        # Build a maxheap.
+        for i in range(N // 2 - 1, -1, -1):
+            self.heapify(N, i)
+
+        # One by one extract elements
+        for i in range(N - 1, 0, -1):
+            self.maxHeap[i], self.maxHeap[0] = self.maxHeap[0], self.maxHeap[i]  # swap
+            self.heapify(i, 0)
 
     #Will print out the duplicates in order of frequency
     def printInOrder(self):
-        t = self.maxHeap
-        while t.__sizeof__() != 0:
-            x = heapq.heappop(self.maxHeap)
-            print(f'{x.key}: {x.instances}')
+       for i in self.maxHeap:
+           print(f'{i.key}: {i.instances}')
