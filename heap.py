@@ -1,16 +1,21 @@
 
+#Charles James Jr
 #utilize class for sets to make has table like data structre
 #Sourced From geeksforgeeks.org https://www.geeksforgeeks.org/heap-sort/
+
+#structre utilized to store both string key and its frequency
 class structSimulator:
     def __init__(self, key, instances):
         self.key = key
         self.instances = instances
 
+#class used to constuct heap
 class MaxHeap:
     def __init__(self):
         self.size = 0
         self.maxHeap = []
 
+    #function used to heapify array 
     def heapify(self, N, i):
         largest = i  # Initialize largest as root
         l = 2 * i + 1  # left = 2*i + 1
@@ -24,6 +29,8 @@ class MaxHeap:
 
         # See if right child of root exists and is
         # greater than root
+
+        #r needs to be less than size or else there will be an error
         if r < self.size:
             if self.maxHeap[r].instances < N and self.maxHeap[largest].instances < self.maxHeap[r].instances:
                 largest = r
@@ -45,6 +52,7 @@ class MaxHeap:
                 self.maxHeap[index].instances +=1
                 self.heapify(self.maxHeap[index].instances, 0)
 
+        #if no duplicate is found, add new struct, and put new append at the front of list to heapify it
         if keyFound is False:
             self.size +=1
             self.maxHeap.append(heap)
@@ -55,6 +63,7 @@ class MaxHeap:
             self.heapify(heap.instances, 0)
 
 
+    #function utilized to sort heap
     def heapSort(self):
         N = self.size
 
@@ -67,7 +76,7 @@ class MaxHeap:
             self.maxHeap[i], self.maxHeap[0] = self.maxHeap[0], self.maxHeap[i]  # swap
             self.heapify(i, 0)
 
-    #Will print out the duplicates in order of frequency
+    #Will print out the duplicates in order of frequency, top ten and least 10
     def printInOrder(self):
         print("10 Most Common Words:")
         for i in self.maxHeap[len(self.maxHeap)-1:len(self.maxHeap)-11:-1]:
@@ -80,4 +89,3 @@ class MaxHeap:
             print(f'{i.key}: {i.instances}')
 
 
-    # The main function to sort an array of given size
