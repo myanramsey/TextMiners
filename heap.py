@@ -15,7 +15,7 @@ class MaxHeap:
         self.size = 0
         self.maxHeap = []
 
-    #function used to heapify array 
+    #function used to heapify array
     def heapify(self, N, i):
         largest = i  # Initialize largest as root
         l = 2 * i + 1  # left = 2*i + 1
@@ -78,6 +78,7 @@ class MaxHeap:
 
     #Will print out the duplicates in order of frequency, top ten and least 10
     def printInOrder(self):
+        self.heapSort()
         print("10 Most Common Words:")
         for i in self.maxHeap[len(self.maxHeap)-1:len(self.maxHeap)-11:-1]:
             print(f'{i.key}: {i.instances}')
