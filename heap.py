@@ -19,13 +19,13 @@ class MaxHeap:
         # See if left child of root exists and is
         # less than root
         if r < self.size:
-            if self.maxHeap[l].instances < N.instances and self.maxHeap[largest].instances < self.maxHeap[l].instances:
+            if self.maxHeap[l].instances < N and self.maxHeap[largest].instances < self.maxHeap[l].instances:
                 largest = l
 
         # See if right child of root exists and is
         # greater than root
         if r < self.size:
-            if self.maxHeap[r].instances < N.instances and self.maxHeap[largest].instances < self.maxHeap[r].instances:
+            if self.maxHeap[r].instances < N and self.maxHeap[largest].instances < self.maxHeap[r].instances:
                 largest = r
 
         # Change root, if needed
@@ -44,12 +44,17 @@ class MaxHeap:
                 keyFound = True
                 print(f'key that was found {i.key}')
                 self.maxHeap[index].instances +=1
-                self.heapify(self.maxHeap[index], 0)
+                self.heapify(self.maxHeap[index].instances, 0)
 
         if keyFound is False:
             self.size +=1
             self.maxHeap.append(heap)
-            self.heapify(heap, 0)
+            i = self.size -1
+            while i > 0:
+                print("i")
+                self.maxHeap[i], self.maxHeap[i -1] = self.maxHeap[i -1], self.maxHeap[i]  # swap
+                i-=1
+            self.heapify(heap.instances, 0)
 
 
     def heapSort(self):
@@ -68,3 +73,7 @@ class MaxHeap:
     def printInOrder(self):
        for i in self.maxHeap:
            print(f'{i.key}: {i.instances}')
+
+
+
+    # The main function to sort an array of given size
