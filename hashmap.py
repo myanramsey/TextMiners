@@ -69,7 +69,7 @@ class hashMap:
 
                 if len(least_common_words) < 10:
                     least_common_words.append((key, value))
-                    least_common_words.sort(key=lambda x: x[1], reverse=True)
+                    least_common_words.sort(key=lambda x: x[1])
                 else:
                     if value < least_common_words[-1][1]:
                         least_common_words.pop()
